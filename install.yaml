@@ -1,10 +1,15 @@
 name: minio
 
-pre_install_actions:
+project_files:
+  - docker-compose.minio-norouter.yaml
+  - docker-compose.minio.yaml
+  - minio/config.env
+  - commands/host/minio
 
 post_install_actions:
-
-project_files:
-  - docker-composer.minio.yaml
-  - minio/data
-  - minio/data/config.env
+  - |
+    #ddev-description:If router disabled, directly expose port
+    #
+    if ( {{ contains "ddev-router" (list .DdevGlobalConfig.omit_containers | toString) }} ); then
+      printf "#ddev-generated\nservices:\n  phpmyadmin:\n    ports:\n      - 8090:25252\n" > docker-compose.phpmyadmin-norouter.yaml
+    fi

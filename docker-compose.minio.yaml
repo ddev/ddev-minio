@@ -1,27 +1,42 @@
 #ddev-generated
 # Simple template to demonstrate addon-template
 services:
-  addon-template:
+  minio:
     container_name: ddev-${DDEV_SITENAME}-minio
-    image: minio/minio
-    networks: [default, ddev_default]
+    image: minio/minio:latest
     restart: "no"
-    # These labels ensure this service is discoverable by ddev.
     labels:
       com.ddev.site-name: ${DDEV_SITENAME}
       com.ddev.approot: $DDEV_APPROOT
+    expose:
+      - "25252:25252"
+      - "9000:9000"
 
     volumes:
-      - ".:/mnt/ddev_config"
+      - type: "volume"
+        source: minio
+        target: "/mnt/data"
+        volume:
+          nocopy: true
       - "./minio/config.env:/etc/config.env"
-      - "./minio/data:/mnt/data"
     environment:
-      HTTP_EXPOSE: 8090:9090
-      HTTPS_EXPOSE: 8090:9090
-      MINIO_CONFIG_ENV_FILE: /etc/config.env
-      MINIO_SERVER_URL: ${DDEV_HOSTNAME}:8090
+      - MINIO_CONFIG_ENV_FILE=/etc/config.env
+      - MINIO_BROWSER_REDIRECT_URL=${DDEV_PRIMARY_URL}:8090
+      - VIRTUAL_HOST=$DDEV_HOSTNAME
+      - HTTP_EXPOSE=8089:25252
+      - HTTPS_EXPOSE=8090:25252
+    healthcheck:
+      interval: 120s
+      timeout: 2s
+      retries: 1
 
     command:
-      - "minio"
-      - "server"
-      - '--console-address ":9090"'
+      - minio
+      - server
+      - --address
+      - :9000
+      - --console-address
+      - :25252
+
+volumes:
+  minio:
