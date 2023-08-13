@@ -48,7 +48,7 @@ teardown() {
   set -eu -o pipefail
   cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
   echo "# ddev get oblakstudio/ddev-minio with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
-  ddev get ddev/ddev-minio
+  ddev get oblakstudio/ddev-minio
   ddev restart >/dev/null
   health_checks
 }
