@@ -1,4 +1,4 @@
-name: tests
+name: E2E Tests
 on:
   pull_request:
   merge_group:
@@ -50,32 +50,34 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
         if: github.event.inputs.debug_enabled == 'true'
 
-      - name: tests
+      - name: Run BATS
         run: bats tests
 
-  # tests:
+      # keepalive-workflow adds a dummy commit if there's no other action here, keeps
+      # GitHub from turning off tests after 60 days
+      - uses: gautamkrishnar/keepalive-workflow@v1
+        with:
+          commit_message: "chore(workflow): Dummy commit [skip ci]"
+
+  # test_bleeding_edge:
+  #   name: Test HEAD and Edge
+  #   timeout-minutes: 5
   #   defaults:
   #     run:
   #       shell: bash
-
+  #   runs-on: ubuntu-latest
   #   strategy:
   #     matrix:
-  #       runner_type: [ubuntu-latest, ddev]
-  #       ddev_version: [stable, HEAD]
-  #     #        ddev_version: [stable, edge, HEAD, PR]
+  #       ddev_version: [edge, HEAD]
   #     fail-fast: false
-
-  #   runs-on: ${{ matrix.runner_type }}
 
   #   steps:
   #     - uses: actions/checkout@v3
   #     - name: Set up Homebrew
   #       id: set-up-homebrew
   #       uses: Homebrew/actions/setup-homebrew@master
-  #       if: matrix.runner_type == 'ubuntu-latest' && matrix.ddev_version == 'HEAD'
 
   #     - name: Environment setup
-  #       if: matrix.runner_type == 'ubuntu-latest' && matrix.ddev_version == 'HEAD'
   #       run: |
   #         brew tap bats-core/bats-core
   #         brew install bats-core bats-support bats-assert mkcert
@@ -89,15 +91,7 @@ jobs:
   #       if: matrix.runner_type == 'ubuntu-latest' && matrix.ddev_version == 'HEAD'
   #       run: brew install --HEAD ddev/ddev/ddev
 
-  #     - name: Use ddev PR
-  #       if: matrix.ddev_version == 'PR'
-  #       run: |
-  #         curl -sSL -o ddev_linux.zip ${NIGHTLY_DDEV_PR_URL}
-  #         unzip ddev_linux.zip
-  #         mv ddev /usr/local/bin/ddev && chmod +x /usr/local/bin/ddev
-
   #     - name: Download docker images
-  #       if: matrix.runner_type == 'ubuntu-latest' && matrix.ddev_version == 'HEAD'
   #       run: mkdir junk && pushd junk && ddev config --auto && ddev debug download-images >/dev/null
 
   #     - name: tmate debugging session
@@ -109,8 +103,3 @@ jobs:
 
   #     - name: tests
   #       run: bats tests
-
-  #     # keepalive-workflow adds a dummy commit if there's no other action here, keeps
-  #     # GitHub from turning off tests after 60 days
-  #     - uses: gautamkrishnar/keepalive-workflow@v1
-  #       if: matrix.ddev_version == 'stable'
