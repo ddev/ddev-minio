@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/oblakstudio/ddev-minio/compare/v1.2.1...v1.2.2) (2023-08-14)
+
+
+### Bug Fixes
+
+* Removed port forwarding ([#5](https://github.com/oblakstudio/ddev-minio/issues/5)) ([d572d4f](https://github.com/oblakstudio/ddev-minio/commit/d572d4ff0ae81a1be9086cb0aaa0e0c878bbf758))
+
 ## [1.2.1](https://github.com/oblakstudio/ddev-minio/compare/v1.2.0...v1.2.1) (2023-08-14)
 
 
