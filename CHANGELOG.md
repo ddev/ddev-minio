@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/oblakstudio/ddev-minio/compare/v1.2.0...v1.2.1) (2023-08-14)
+
+
+### Bug Fixes
+
+* Fixed volume name and label ([b00f875](https://github.com/oblakstudio/ddev-minio/commit/b00f875ffd27fcced24a20b3a32a10543e8f42fb))
+
 # [1.2.0](https://github.com/oblakstudio/ddev-minio/compare/v1.1.0...v1.2.0) (2023-08-14)
 
 
