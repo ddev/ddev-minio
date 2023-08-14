@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/oblakstudio/ddev-minio/compare/v1.0.0...v1.1.0) (2023-08-14)
+
+
+### Features
+
+* Implemented mc command ([30d7952](https://github.com/oblakstudio/ddev-minio/commit/30d795214cc4b1e5151383fce17258829055c7bc))
+
 # 1.0.0 (2023-08-13)
 
 
