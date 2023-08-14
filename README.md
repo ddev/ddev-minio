@@ -4,7 +4,7 @@
 
 ![GitHub release (with filter)](https://img.shields.io/github/v/release/oblakstudio/ddev-minio)
 [![Release](https://github.com/oblakstudio/ddev-minio/actions/workflows/release.yml/badge.svg)](https://github.com/oblakstudio/ddev-minio/actions/workflows/release.yml)
-[![tests](https://github.com/oblakstudio/ddev-minio/actions/workflows/tests.yml/badge.svg?event=push)](https://github.com/oblakstudio/ddev-minio/actions/workflows/tests.yml)
+[![tests](https://github.com/oblakstudio/ddev-minio/actions/workflows/test_stable.yml/badge.svg?event=push)](https://github.com/oblakstudio/ddev-minio/actions/workflows/tests.yml)
 [![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 ![project is maintained](https://img.shields.io/maintenance/yes/2024.svg)
 

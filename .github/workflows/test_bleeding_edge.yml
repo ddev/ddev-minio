@@ -28,7 +28,6 @@ env:
 jobs:
   test_bleeding_edge:
     name: Test ${{ matrix.ddev_version }}
-    timeout-minutes: 5
     defaults:
       run:
         shell: bash
