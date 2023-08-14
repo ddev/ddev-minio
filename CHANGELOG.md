@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/oblakstudio/ddev-minio/compare/v1.1.0...v1.2.0) (2023-08-14)
+
+
+### Features
+
+* Improved and sped-up tests ([09b18ee](https://github.com/oblakstudio/ddev-minio/commit/09b18ee657f41d5b79e4d41044b16309202f2aaa))
+
 # [1.1.0](https://github.com/oblakstudio/ddev-minio/compare/v1.0.0...v1.1.0) (2023-08-14)
 
 
