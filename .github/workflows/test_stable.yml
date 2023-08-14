@@ -39,7 +39,7 @@ jobs:
     defaults:
       run:
         shell: bash
-    runs-on: ddev
+    runs-on: ddev-test-runner
     steps:
       - uses: actions/checkout@v3
 
