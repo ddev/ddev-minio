@@ -42,3 +42,6 @@ services:
 
 volumes:
   minio:
+    name: ddev-${DDEV_SITENAME}-minio
+    labels:
+      com.ddev.site-name: ${DDEV_SITENAME}
