@@ -11,8 +11,6 @@ services:
     expose:
       - "9999:9999"
       - "9000:9000"
-    ports:
-      - "9000"
     volumes:
       - type: "volume"
         source: minio
