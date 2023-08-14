@@ -1,6 +1,9 @@
 name: Release
 on:
   push:
+    paths-ignore:
+      - "**/renovate.json"
+      - README.md
     branches:
       - master
 jobs:

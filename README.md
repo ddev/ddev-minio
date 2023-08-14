@@ -30,22 +30,15 @@ Project docker instances can access MinIO api via `http://minio:9000`
 
 ## Commands
 
-Addon exposes the following commands:
+Addon exposes the following commands
 
-### minio
-
-```bash
-ddev minio
-```
-Launches MinIO console in your browser.
-
-### mc
-```bash
-ddev mc
-```
-Launches MinIO client in your terminal.
+| Command | Usage        | Description                     |
+|---------|--------------|---------------------------------|
+| `minio` | `ddev minio` | Launches the MinIO Console      |
+| `mc`    | `ddev mc`    | Launches the MinIo admin client |
 
 ___
 
 **Based on the original [ddev-contrib recipe](https://github.com/ddev/ddev-contrib/tree/master/docker-compose-services/mongodb)**
 **Developed and maintained by [Oblak Studio](https://github.com/oblakstudio)**
+
