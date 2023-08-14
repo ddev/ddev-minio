@@ -35,6 +35,7 @@ env:
 jobs:
   test_stable:
     name: Test DDEV stable
+    timeout-minutes: 5
     defaults:
       run:
         shell: bash
