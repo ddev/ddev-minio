@@ -5,6 +5,7 @@ project_files:
   - docker-compose.minio.yaml
   - minio/config.env
   - commands/host/minio
+  - commands/minio/mc
 
 post_install_actions:
   - |

@@ -1,5 +1,5 @@
 #ddev-generated
-# Simple template to demonstrate addon-template
+# MinIO addon for DDEV
 services:
   minio:
     container_name: ddev-${DDEV_SITENAME}-minio
@@ -11,7 +11,8 @@ services:
     expose:
       - "25252:25252"
       - "9000:9000"
-
+    ports:
+      - "127.0.0.1:9000:9000"
     volumes:
       - type: "volume"
         source: minio
@@ -19,6 +20,7 @@ services:
         volume:
           nocopy: true
       - "./minio/config.env:/etc/config.env"
+      - ".:/mnt/ddev_config"
     environment:
       - MINIO_CONFIG_ENV_FILE=/etc/config.env
       - MINIO_BROWSER_REDIRECT_URL=${DDEV_PRIMARY_URL}:8090
