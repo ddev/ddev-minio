@@ -1,3 +1,11 @@
+## [1.2.3](https://github.com/oblakstudio/ddev-minio/compare/v1.2.2...v1.2.3) (2023-08-17)
+
+
+### Bug Fixes
+
+* Fixed ddev signature ([17c0f5b](https://github.com/oblakstudio/ddev-minio/commit/17c0f5be561e502ebb0aa9bc71843800df1c5cb3))
+* Fixed volume path ([f7655f5](https://github.com/oblakstudio/ddev-minio/commit/f7655f55aa2767029fddcd5dfc1dcc490552e6b4))
+
 ## [1.2.2](https://github.com/oblakstudio/ddev-minio/compare/v1.2.1...v1.2.2) (2023-08-14)
 
 
