@@ -1,0 +1,10 @@
+#ddev-generated
+# MinIO addon for DDEV - Proxy ports 9000 and 9090
+services:
+  minio:
+    environment:
+      MINIO_SERVER_URL: ${DDEV_PRIMARY_URL}:9000
+      MINIO_BROWSER_REDIRECT_URL: ${DDEV_PRIMARY_URL}:9090
+      VIRTUAL_HOST: $DDEV_HOSTNAME
+      HTTP_EXPOSE: "9089:9090,8999:9000"
+      HTTPS_EXPOSE: "9090:9090,9000:9000"
