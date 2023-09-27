@@ -4,50 +4,58 @@ load "${TEST_BREW_PREFIX}/lib/bats-assert/load.bash"
 
 setup() {
   set -eu -o pipefail
-  export DIR="$( cd "$( dirname "$BATS_TEST_FILENAME" )" >/dev/null 2>&1 && pwd )/.."
-  export TESTDIR=~/tmp/test-minio
-  mkdir -p $TESTDIR
-  export PROJNAME=test-minio
+
+  export ADDON_DIR="$( cd "$( dirname "$BATS_TEST_FILENAME" )" >/dev/null 2>&1 && pwd )/.."
+  export PROJECT=testproj
+  export TEST_DIR="$HOME/tmp/$PROJECT"
   export DDEV_NON_INTERACTIVE=true
-  ddev delete -Oy ${PROJNAME} >/dev/null 2>&1 || true
-  cd "${TESTDIR}"
-  # Create a project with a web container only
-  ddev config --project-name=${PROJNAME} --omit-containers=db
-  # Disable upload dirs warning
-  ddev config --disable-upload-dirs-warning
-  ddev start >/dev/null
-  ddev stop > /dev/null
+
+  mkdir -p $TEST_DIR && cd "$TEST_DIR" || ( printf "unable to cd to $TEST_DIR\n" && exit 1 )
+
+  ddev delete -Oy $PROJECT >/dev/null 2>&1 || true
+  ddev config --project-name=$PROJECT --omit-containers=db --disable-upload-dirs-warning
 }
 
 health_checks() {
   set +u # bats-assert has unset variables so turn off unset check
-  # ddev restart is required because we have done `ddev get` on a new service
+
+  # get the addon
   run bash -c "ddev get $1"
   assert_success
+
+  # start the project
   run bash -c "ddev start -y"
   assert_success
-  # Make sure we can hit the 8090 port successfully
-  curl -s -I -f  https://${PROJNAME}.ddev.site:8090 >/tmp/curlout.txt
+
+  # Make sure we can hit the 9090 port successfully
+  curl -s -I -f  https://${PROJECT}.ddev.site:9090 >/tmp/curlout.txt
   # Make sure `ddev minio` works
   run bash -c "DDEV_DEBUG=true ddev minio"
   assert_success
-  assert_output "FULLURL https://${PROJNAME}.ddev.site:8090"
+  assert_output "FULLURL https://${PROJECT}.ddev.site:9090"
+
+  # Make sure mc works
+  run bash -c "ddev mc admin info minio"
+  assert_success
 }
 
 teardown() {
   set -eu -o pipefail
-  cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
-  ddev delete -Oy ${PROJNAME} >/dev/null 2>&1
-  [ "${TESTDIR}" != "" ] && rm -rf ${TESTDIR}
+  cd "$TEST_DIR" || ( printf "unable to cd to $TEST_DIR\n" && exit 1 )
+  ddev stop
+  ddev delete -Oy "$PROJECT" >/dev/null 2>&1
+  [ "$TEST_DIR" != "" ] && rm -rf "$TEST_DIR"
 }
 
+# bats test_tags=local
 @test "install from directory" {
   set -eu -o pipefail
-  cd ${TESTDIR}
-  echo "# ddev get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
-  health_checks ${DIR}
+  cd "$TEST_DIR"
+  echo "# ddev get $TEST_DIR with project "$PROJECT" in "$TEST_DIR"" >&3
+  health_checks "$ADDON_DIR"
 }
 
+# bats test_tags=release
 @test "install from release" {
   set -eu -o pipefail
   cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
