@@ -18,15 +18,20 @@ It's based on [MinIO official image](https://hub.docker.com/r/minio/minio) and [
 
 ### MinIO bucket
 
-Login to MinIO console `https://<project>.ddev.site:8090` login with default credentials `minioadmin:minioadmin` and create a bucket.
+Login to MinIO console `https://<project>.ddev.site:9090` login with credentials `ddevminio:ddevminio` and create a bucket.
 
 ### Composer package
 
 Your project will most likely require the [AWS PHP SDK](https://packagist.org/packages/aws/aws-sdk-php). You can install it like this
+
 ```bash
 $ ddev composer require aws/aws-sdk-php
 ```
 Project docker instances can access MinIO api via `http://minio:9000`
+
+### Public access
+
+DDEV Router is configured to proxy the requests to `https://<project>.ddev.site:9000` to MinIO S3 Api.
 
 ## Commands
 
