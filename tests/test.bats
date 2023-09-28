@@ -58,8 +58,8 @@ teardown() {
 # bats test_tags=release
 @test "install from release" {
   set -eu -o pipefail
-  cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
-  echo "# ddev get oblakstudio/ddev-minio with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
+  cd ${TEST_DIR} || ( printf "unable to cd to ${TEST_DIR}\n" && exit 1 )
+  echo "# ddev get oblakstudio/ddev-minio with project ${PROJNAME} in ${TEST_DIR} ($(pwd))" >&3
   health_checks "oblakstudio/ddev-minio"
 }
 
