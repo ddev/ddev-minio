@@ -59,7 +59,7 @@ teardown() {
 @test "install from release" {
   set -eu -o pipefail
   cd ${TEST_DIR} || ( printf "unable to cd to ${TEST_DIR}\n" && exit 1 )
-  echo "# ddev get oblakstudio/ddev-minio with project ${PROJNAME} in ${TEST_DIR} ($(pwd))" >&3
+  echo "# ddev get oblakstudio/ddev-minio with project ${PROJECT} in ${TEST_DIR} ($(pwd))" >&3
   health_checks "oblakstudio/ddev-minio"
 }
 
