@@ -6,7 +6,7 @@ on:
 jobs:
   run_tests:
     name: Run tests
-    uses: oblakstudio/public-workflows/.github/workflows/ddev/test_ddev_addon.yaml@v1
+    uses: oblakstudio/public-workflows/.github/workflows/ddev-test_addon.yaml@v1
     secrets: inherit
     with:
       test_type: "local"
