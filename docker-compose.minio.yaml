@@ -15,7 +15,7 @@ services:
       --console-address
       :9090
       --address
-      :9000
+      :10101
     volumes:
       - "minio:/data"
       - ".:/mnt/ddev_config"
@@ -23,7 +23,7 @@ services:
       - "./minio/mc-config.json:/root/.mc/config.json"
     expose:
       - "9000"
-      - "9090"
+      - "10101"
     networks:
       - default
       - ddev_default
