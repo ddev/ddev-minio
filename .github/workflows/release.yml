@@ -16,6 +16,12 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.OBLAK_BOT_TOKEN }}
+      - name: Test the addon
+        uses: oblakstudio/action-test-ddev-addon@v1
+        with:
+          ddev_version: stable
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          test_type: local
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v5
         with:
