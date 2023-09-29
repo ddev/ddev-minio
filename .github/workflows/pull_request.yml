@@ -10,3 +10,4 @@ jobs:
     secrets: inherit
     with:
       test_type: "local"
+      os: '["ubuntu-latest"]'
