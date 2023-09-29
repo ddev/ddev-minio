@@ -26,11 +26,11 @@ Your project will most likely require the [AWS PHP SDK](https://packagist.org/pa
 ```bash
 $ ddev composer require aws/aws-sdk-php
 ```
-Project docker instances can access MinIO api via `http://minio:9000`
+Project docker instances can access MinIO api via `http://minio:10101`
 
 ### Public access
 
-DDEV Router is configured to proxy the requests to `https://<project>.ddev.site:9000` to MinIO S3 Api.
+DDEV Router is configured to proxy the requests to `https://<project>.ddev.site:10101` to MinIO S3 Api.
 
 ## Commands
 
