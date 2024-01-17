@@ -38,4 +38,4 @@ jobs:
           GIT_COMMITTER_NAME: "oblakbot"
           GIT_COMMITTER_EMAIL: "sibin.grasic+bot@oblak.studio"
           GITHUB_TOKEN: ${{ secrets.OBLAK_BOT_TOKEN }}
-        run: yarn semantic-release
+        run: npm run semantic-release

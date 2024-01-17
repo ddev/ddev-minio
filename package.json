@@ -7,6 +7,5 @@
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^9.0.4",
     "semantic-release": "^22.0.0"
-  },
-  "packageManager": "yarn@3.6.1"
+  }
 }
