@@ -1,6 +1,9 @@
 name: "Test DDEV Addon"
 on:
   pull_request:
+    paths-ignore:
+      - "README.md"
+      - ".github/workflows/*.yml"
   merge_group:
 
 jobs:

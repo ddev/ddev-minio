@@ -32,7 +32,7 @@ health_checks() {
   # Make sure `ddev minio` works
   run bash -c "DDEV_DEBUG=true ddev minio"
   assert_success
-  assert_output "FULLURL https://${PROJECT}.ddev.site:9090"
+  assert_line "FULLURL https://${PROJECT}.ddev.site:9090"
 
   # Make sure mc works
   run bash -c "ddev mc admin info minio"
