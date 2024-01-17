@@ -3,11 +3,15 @@
 services:
   minio:
     container_name: ddev-${DDEV_SITENAME}-minio
+    # image: minio/minio:latest
     build:
       context: .minioImageBuild
     hostname: ddev-${DDEV_SITENAME}-minio
     environment:
       MINIO_VOLUMES: "/data"
+      MC_CONFIG_DIR: "/root/.mc"
+      MINIO_UID: $DDEV_UID
+      MINIO_GID: $DDEV_GID
       MINIO_ROOT_USER: ddevminio
       MINIO_ROOT_PASSWORD: ddevminio
     command: >
@@ -22,7 +26,7 @@ services:
       - ddev-global-cache:/mnt/ddev-global-cache
       - "./minio/mc-config.json:/root/.mc/config.json"
     expose:
-      - "9000"
+      - "9090"
       - "10101"
     networks:
       - default
