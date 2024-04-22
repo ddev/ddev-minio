@@ -33,6 +33,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: gautamkrishnar/keepalive-workflow@1.2.2
+      - name: Import GPG keys
+        uses: crazy-max/ghaction-import-gpg@v6
+        id: gpg
         with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          git_config_global: true
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+      - uses: gautamkrishnar/keepalive-workflow@v2
+        with:
+          gh_token: ${{ secrets.OBLAK_BOT_TOKEN }}
+          committer_username: "oblakbot"
+          committer_email: "i.am@oblak.bot"
           commit_message: "chore(cron): Keepalive workflow [skip ci]"
