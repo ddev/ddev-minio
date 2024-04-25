@@ -3,7 +3,7 @@
 # ddev-minio - use MinIO object storage in DDEV
 
 ![GitHub release (with filter)](https://img.shields.io/github/v/release/oblakstudio/ddev-minio)
-[![E2E Tests](https://github.com/oblakstudio/ddev-minio/actions/workflows/cron_tests.yml/badge.svg?event=schedule)](https://github.com/oblakstudio/ddev-minio/actions/workflows/tests.yml)
+[![Daily tests](https://github.com/oblakstudio/ddev-minio/actions/workflows/cron_tests.yml/badge.svg)](https://github.com/oblakstudio/ddev-minio/actions/workflows/cron_tests.yml)
 [![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 ![project is maintained](https://img.shields.io/maintenance/yes/2024.svg)
 
