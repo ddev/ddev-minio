@@ -1,50 +1,41 @@
 name: "Daily tests"
 on:
-  workflow_dispatch:
-    inputs:
-      debug_enabled:
-        type: boolean
-        description: Debug with tmate
-        required: false
-        default: false
-      ddev_version:
-        type: string
-        description: DDEV version to test
-        required: false
-        default: '["stable"]'
-      test_type:
-        type: string
-        description: Test type to run. Can be "local" or "release"
-        required: false
-        default: "release"
+  pull_request:
+  push:
+    branches: [main]
+
   schedule:
     - cron: "25 08 * * *"
 
+  workflow_dispatch:
+    inputs:
+      debug_enabled:
+        description: 'Debug with tmate set "debug_enabled"'
+        required: false
+        default: "false"
+
+env:
+  # Allow ddev get to use a github token to prevent rate limiting by tests
+  DDEV_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+# Required permissions for keep-alive, used by ddev/github-action-add-on-test
+permissions:
+  actions: write
+
 jobs:
-  run_tests:
-    name: Run tests
-    uses: oblakstudio/public-workflows/.github/workflows/ddev-test_addon.yaml@v1
-    secrets: inherit
-    with:
-      ddev_version: '["stable", "HEAD", "edge"]'
-      test_type: "release"
-  keep-the-job-alive:
-    name: Keep the job alive
+  tests:
+    strategy:
+      matrix:
+        ddev_version: [stable, HEAD]
+      fail-fast: false
+
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Import GPG keys
-        uses: crazy-max/ghaction-import-gpg@v6
-        id: gpg
+      - uses: ddev/github-action-add-on-test@v2
         with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.GPG_PASSPHRASE }}
-          git_config_global: true
-          git_user_signingkey: true
-          git_commit_gpgsign: true
-      - uses: gautamkrishnar/keepalive-workflow@v2
-        with:
-          gh_token: ${{ secrets.OBLAK_BOT_TOKEN }}
-          committer_username: "oblakbot"
-          committer_email: "i.am@oblak.bot"
-          commit_message: "chore(cron): Keepalive workflow [skip ci]"
+          ddev_version: ${{ matrix.ddev_version }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          debug_enabled: ${{ github.event.inputs.debug_enabled }}
+          addon_repository: ${{ env.GITHUB_REPOSITORY }}
+          addon_ref: ${{ env.GITHUB_REF }}
