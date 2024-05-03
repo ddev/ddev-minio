@@ -2,8 +2,8 @@
 
 # ddev-minio - use MinIO object storage in DDEV
 
-![GitHub release (with filter)](https://img.shields.io/github/v/release/oblakstudio/ddev-minio)
-[![Daily tests](https://github.com/oblakstudio/ddev-minio/actions/workflows/cron_tests.yml/badge.svg)](https://github.com/oblakstudio/ddev-minio/actions/workflows/cron_tests.yml)
+![GitHub release (with filter)](https://img.shields.io/github/v/release/ddev/ddev-minio)
+[![Daily tests](https://github.com/ddev/ddev-minio/actions/workflows/cron_tests.yml/badge.svg)](https://github.com/ddev/ddev-minio/actions/workflows/cron_tests.yml)
 [![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 ![project is maintained](https://img.shields.io/maintenance/yes/2024.svg)
 
@@ -12,6 +12,13 @@
 This repository provides MinIO add-on to [DDEV](https://ddev.readthedocs.io).
 
 It's based on [MinIO official image](https://hub.docker.com/r/minio/minio) and [DDEV custom compose files](https://ddev.readthedocs.io/en/stable/users/extend/custom-compose-files/)
+
+## Installation
+
+```bash
+$ ddev get ddev/ddev-minio
+$ ddev restart
+```
 
 ## Configuration
 
