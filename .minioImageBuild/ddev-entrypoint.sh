@@ -1,5 +1,6 @@
 #!/bin/sh
-# ddev-generated
+#ddev-generated
+
 mkdir -p ~/.minio/certs/CAs
 cp -ar /mnt/ddev-global-cache/mkcert/* ~/.minio/certs/CAs
 
