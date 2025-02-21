@@ -15,9 +15,22 @@ It's based on [MinIO official image](https://hub.docker.com/r/minio/minio) and [
 
 ## Installation
 
+For DDEV v1.23.5 or above run
+
 ```bash
-$ ddev get ddev/ddev-minio
-$ ddev restart
+ddev add-on get ddev/ddev-minio
+```
+
+For earlier versions of DDEV run
+
+```bash
+ddev get ddev/ddev-minio
+```
+
+Then restart the project
+
+```bash
+ddev restart
 ```
 
 ## Configuration
@@ -46,7 +59,7 @@ Example URLs for accessing files are
 Since MinIO is S3 compatible you can use [AWS PHP SDK](https://packagist.org/packages/aws/aws-sdk-php). Install it with composer:
 
 ```bash
-$ ddev composer require aws/aws-sdk-php
+ddev composer require aws/aws-sdk-php
 ```
 
 ### Basic usage
@@ -102,4 +115,3 @@ ___
 
 **Based on the original [ddev-contrib recipe](https://github.com/ddev/ddev-contrib/tree/master/docker-compose-services/mongodb)**  
 **Developed and maintained by [Oblak Studio](https://github.com/oblakstudio)**
-
