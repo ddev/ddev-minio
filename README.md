@@ -26,6 +26,7 @@ After installation, make sure to commit the `.ddev` directory to version control
 | ------- | ----------- |
 | `ddev minio` | Open MinIO console in your browser (`https://<project>.ddev.site:9090`) |
 | `ddev mc` | Run MinIO admin client |
+| `ddev logs -s minio` | Check MinIO logs |
 
 ### MinIO console credentials
 
