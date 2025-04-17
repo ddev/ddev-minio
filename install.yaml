@@ -1,9 +1,28 @@
 name: minio
 
 project_files:
-  - .minioImageBuild/Dockerfile
-  - .minioImageBuild/ddev-entrypoint.sh
   - commands/host/minio
   - commands/minio/mc
-  - minio/mc-config.json
   - docker-compose.minio.yaml
+
+ddev_version_constraint: '>= v1.24.3'
+
+pre_install_actions:
+  - |
+    #ddev-nodisplay
+    #ddev-description:Removing old minio files
+    has_old_files=false
+    for file in "${DDEV_APPROOT}/.ddev/minio/mc-config.json" "${DDEV_APPROOT}/.ddev/.minioImageBuild/Dockerfile" "${DDEV_APPROOT}/.ddev/.minioImageBuild/ddev-entrypoint.sh"; do
+      if [ ! -f "${file}" ]; then
+        continue
+      fi
+      if grep -q '#ddev-generated' "${file}"; then
+        rm -f "${file}"
+      else
+        echo "${file} needs to be removed but has been modified by the user. Please check it and remove it"
+        has_old_files=true
+      fi
+    done
+    if [ "${has_old_files}" = true ]; then
+      exit 2
+    fi
