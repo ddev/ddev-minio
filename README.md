@@ -1,49 +1,44 @@
-<div align="center">
+[![add-on registry](https://img.shields.io/badge/DDEV-Add--on_Registry-blue)](https://addons.ddev.com)
+[![tests](https://github.com/ddev/ddev-minio/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/ddev/ddev-minio/actions/workflows/tests.yml?query=branch%3Amain)
+[![last commit](https://img.shields.io/github/last-commit/ddev/ddev-minio)](https://github.com/ddev/ddev-minio/commits)
+[![release](https://img.shields.io/github/v/release/ddev/ddev-minio)](https://github.com/ddev/ddev-minio/releases/latest)
 
-# ddev-minio - use MinIO object storage in DDEV
+# DDEV MinIO
 
-![GitHub release (with filter)](https://img.shields.io/github/v/release/ddev/ddev-minio)
-[![Daily tests](https://github.com/ddev/ddev-minio/actions/workflows/cron_tests.yml/badge.svg)](https://github.com/ddev/ddev-minio/actions/workflows/cron_tests.yml)
-[![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
-![project is maintained](https://img.shields.io/maintenance/yes/2024.svg)
+## Overview
 
-</div>
+[MinIO](https://min.io/) is an object storage system. It is API compatible with the Amazon S3 cloud storage service. It is capable of working with unstructured data such as photos, videos, log files, backups, and container images with the maximum supported object size being 50TB.
 
-This repository provides MinIO add-on to [DDEV](https://ddev.readthedocs.io).
-
-It's based on [MinIO official image](https://hub.docker.com/r/minio/minio) and [DDEV custom compose files](https://ddev.readthedocs.io/en/stable/users/extend/custom-compose-files/)
+This add-on integrates MinIO into your [DDEV](https://ddev.com/) project.
 
 ## Installation
 
-For DDEV v1.23.5 or above run
-
-```bash
+```sh
 ddev add-on get ddev/ddev-minio
-```
-
-For earlier versions of DDEV run
-
-```bash
-ddev get ddev/ddev-minio
-```
-
-Then restart the project
-
-```bash
 ddev restart
 ```
 
-## Configuration
+After installation, make sure to commit the `.ddev` directory to version control.
 
-### MinIO console
+## Usage
 
-Login to MinIO console `https://<project>.ddev.site:9090` login with credentials `ddevminio:ddevminio` and create a bucket.
+| Command | Description |
+| ------- | ----------- |
+| `ddev minio` | Open MinIO console in your browser (`https://<project>.ddev.site:9090`) |
+| `ddev mc` | Run MinIO admin client |
+
+### MinIO console credentials
+
+| Field    | Value       |
+|----------|-------------|
+| Username | `ddevminio` |
+| Password | `ddevminio` |
 
 ### File access
 
-Project docker instances can access MinIO api via `http://minio:10101`
+Project docker instances can access MinIO API via `http://minio:10101`
 
-DDEV Router is configured to proxy the requests to `https://<project>.ddev.site:10101` to MinIO S3 Api.
+DDEV router is configured to proxy the requests to `https://<project>.ddev.site:10101` to MinIO S3 API.
 
 Example URLs for accessing files are
 
@@ -102,16 +97,40 @@ $object = $s3->getObject([
 echo $object['Body'];
 ```
 
-## Commands
+## Advanced Customization
 
-Addon exposes the following commands
+To change the Docker image:
 
-| Command | Usage        | Description                     |
-|---------|--------------|---------------------------------|
-| `minio` | `ddev minio` | Launches the MinIO Console      |
-| `mc`    | `ddev mc`    | Launches the MinIo admin client |
+```bash
+ddev dotenv set .ddev/.env.minio --minio-docker-image=minio/minio:latest
+ddev add-on get ddev/ddev-minio
+ddev restart
+```
 
-___
+You can modify `.ddev/docker-compose.minio.yaml` directly by removing the `#ddev-generated` line, but it's recommended to use a separate `.ddev/docker-compose.minio_extra.yaml` file for overrides, for example:
 
-**Based on the original [ddev-contrib recipe](https://github.com/ddev/ddev-contrib/tree/master/docker-compose-services/mongodb)**  
+```yaml
+services:
+  minio:
+    command: server --console-address :9090 --address :10101
+
+configs:
+  mc-config.json:
+    content: |
+      {
+        "version": "10",
+        "aliases": {
+          "minio": {
+            "url": "http://localhost:10101",
+            "accessKey": "ddevminio",
+            "secretKey": "ddevminio",
+            "api": "s3v4",
+            "path": "auto"
+          }
+        }
+      }
+```
+
+## Credits
+
 **Developed and maintained by [Oblak Studio](https://github.com/oblakstudio)**
