@@ -5,6 +5,8 @@
 ## Usage: minio
 ## Example: "ddev minio"
 
+echo "Login using 'ddevminio' user and 'ddevminio' password"
+
 DDEV_MINIOCONSOLE_PORT=9089
 DDEV_MINIOCONSOLE_HTTPS_PORT=9090
 
