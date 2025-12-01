@@ -134,4 +134,6 @@ configs:
 
 ## Credits
 
-**Developed and maintained by [Oblak Studio](https://github.com/oblakstudio)**
+**Contributed by [Oblak Studio](https://github.com/oblakstudio)**
+
+**Maintained by the [DDEV team](https://ddev.com/support-ddev/)**

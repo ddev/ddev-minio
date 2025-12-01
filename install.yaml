@@ -5,11 +5,10 @@ project_files:
   - commands/minio/mc
   - docker-compose.minio.yaml
 
-ddev_version_constraint: '>= v1.24.3'
+ddev_version_constraint: '>= v1.24.10'
 
 pre_install_actions:
   - |
-    #ddev-nodisplay
     #ddev-description:Removing old minio files
     has_old_files=false
     for file in "${DDEV_APPROOT}/.ddev/minio/mc-config.json" "${DDEV_APPROOT}/.ddev/.minioImageBuild/Dockerfile" "${DDEV_APPROOT}/.ddev/.minioImageBuild/ddev-entrypoint.sh"; do
