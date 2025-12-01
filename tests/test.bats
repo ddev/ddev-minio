@@ -45,8 +45,8 @@ health_checks() {
 
   run ddev describe
   assert_success
-  assert_output --partial "user: ddevminio"
-  assert_output --partial "pass: ddevminio"
+  assert_output --partial "User: ddevminio"
+  assert_output --partial "Pass: ddevminio"
 
   # Make sure we can hit the 9090 port successfully
   run curl -sfI https://${PROJNAME}.ddev.site:9090

@@ -51,8 +51,8 @@ services:
       retries: 1
     x-ddev:
       describe-info: |
-        user: ddevminio
-        pass: ddevminio
+        User: ddevminio
+        Pass: ddevminio
       ssh-shell: bash
 
 configs:
