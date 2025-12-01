@@ -39,6 +39,15 @@ setup() {
 }
 
 health_checks() {
+  run ddev exec -s minio command -v bash
+  assert_success
+  assert_output --partial "bash"
+
+  run ddev describe
+  assert_success
+  assert_output --partial "user: ddevminio"
+  assert_output --partial "pass: ddevminio"
+
   # Make sure we can hit the 9090 port successfully
   run curl -sfI https://${PROJNAME}.ddev.site:9090
   assert_success
