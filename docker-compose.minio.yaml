@@ -3,6 +3,7 @@ services:
   minio:
     container_name: ddev-${DDEV_SITENAME}-minio
     image: ${MINIO_DOCKER_IMAGE:-minio/minio:latest}
+    hostname: ${DDEV_SITENAME}-minio
     environment:
       MINIO_VOLUMES: "/data"
       MC_CONFIG_DIR: "/root/.mc"
@@ -35,8 +36,6 @@ services:
     labels:
       com.ddev.site-name: ${DDEV_SITENAME}
       com.ddev.approot: ${DDEV_APPROOT}
-    external_links:
-      - ddev-router:${DDEV_SITENAME}.${DDEV_TLD}
     deploy:
       resources:
         limits:
@@ -50,6 +49,11 @@ services:
       interval: 120s
       timeout: 2s
       retries: 1
+    x-ddev:
+      describe-info: |
+        User: ddevminio
+        Pass: ddevminio
+      ssh-shell: bash
 
 configs:
   mc-config.json:
