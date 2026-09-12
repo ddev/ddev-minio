@@ -3,7 +3,9 @@
 [![last commit](https://img.shields.io/github/last-commit/ddev/ddev-minio)](https://github.com/ddev/ddev-minio/commits)
 [![release](https://img.shields.io/github/v/release/ddev/ddev-minio)](https://github.com/ddev/ddev-minio/releases/latest)
 
-# DDEV MinIO
+# DDEV MinIO ARCHIVED because upstream repo is archived and minio/minio docker image is gone
+
+THIS REPOSITORY IS ARCHIVED and NO LONGER FUNCTIONAL.
 
 ## Overview
 
